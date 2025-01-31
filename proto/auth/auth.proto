@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package auth_proto;
+
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/Georgy27/auth_protos/proto/auth/auth.proto;auth_proto";
+
+service Auth {
+  rpc Register (RegisterRequest) returns (google.protobuf.Empty) {}
+  rpc Login (LoginRequest) returns (LoginResponse) {}
+  rpc IsAdmin (IsAdminRequest) returns (IsAdminResponse) {}
+}
+
+message RegisterRequest {
+  string email = 1;
+  string username = 2;
+  string password = 3;
+}
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+  // can add here later app_id if necessary
+}
+
+message LoginResponse {
+  string access_token = 1;
+}
+
+message IsAdminRequest {
+  string user_id = 1;
+}
+
+message IsAdminResponse {
+  bool is_admin = 1;
+}
